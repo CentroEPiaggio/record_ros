@@ -19,16 +19,12 @@ void Record::wait_for_callback(){
     }
 }
 
-bool Record::trigger_command(std_srvs::Trigger::Request& req, std_srvs::Trigger::Response& res){
+bool Record::trigger_command(std_srvs::Empty::Request& req, std_srvs::Empty::Response& res){
     ROS_INFO("Record callback");
     if(b_record){
         ros::shutdown();
-        res.success = true;
-        res.message = "stopping recorder";
     }else{
         b_record = true;
-        res.success = true;
-        res.message  = "starting recorder";
     }
     return true;
 }

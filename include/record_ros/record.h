@@ -1,8 +1,7 @@
 #ifndef RECORD_ROS_RECORD_H_
 #define RECORD_ROS_RECORD_H_
 
-#include "std_srvs/Trigger.h"
-#include <std_msgs/String.h>
+#include "std_srvs/Empty.h"
 #include <rosbag/recorder.h>
 
 class Record : public rosbag::Recorder{
@@ -15,7 +14,7 @@ public:
 
 private:
 
-    bool trigger_command(std_srvs::Trigger::Request& req, std_srvs::Trigger::Response& res);
+    bool trigger_command(std_srvs::Empty::Request& req, std_srvs::Empty::Response& res);
 
 private:
 
