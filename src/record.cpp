@@ -5,7 +5,7 @@
 Record::Record(ros::NodeHandle &nh,rosbag::RecorderOptions const& options):
     rosbag::Recorder(options)
 {
-    service_srv = nh.advertiseService("cmd",&Record::string_command,this);
+    service_srv = nh.advertiseService("cmd",&Record::trigger_command,this);
     b_record    = false;
 
 }
@@ -19,25 +19,16 @@ void Record::wait_for_callback(){
     }
 }
 
-bool Record::string_command(record_ros::String_cmd::Request& req, record_ros::String_cmd::Response& res){
-    std::string cmd = req.cmd;
+bool Record::trigger_command(std_srvs::Trigger::Request& req, std_srvs::Trigger::Response& res){
     ROS_INFO("Record callback");
-    if(cmd == "record"){
-        if(b_record){
-            ros::shutdown();
-            res.res = "stopping recorder";
-        }else{
-            b_record = true;
-            res.res  = "starting recorder";
-        }
-        return true;
-    }else if(cmd == "stop"){
+    if(b_record){
         ros::shutdown();
-        res.res = "stopping recorder";
-        return true;
+        res.success = true;
+        res.message = "stopping recorder";
     }else{
-        res.res = "No such command[" + cmd + "] in [Record::string_command]";
-        ROS_WARN_STREAM(res.res);
-        return false;
+        b_record = true;
+        res.success = true;
+        res.message  = "starting recorder";
     }
+    return true;
 }

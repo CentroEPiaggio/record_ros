@@ -1,7 +1,7 @@
 #ifndef RECORD_ROS_RECORD_H_
 #define RECORD_ROS_RECORD_H_
 
-#include "record_ros/String_cmd.h"
+#include "std_srvs/Trigger.h"
 #include <std_msgs/String.h>
 #include <rosbag/recorder.h>
 
@@ -15,7 +15,7 @@ public:
 
 private:
 
-    bool string_command(record_ros::String_cmd::Request& req, record_ros::String_cmd::Response& res);
+    bool trigger_command(std_srvs::Trigger::Request& req, std_srvs::Trigger::Response& res);
 
 private:
 
