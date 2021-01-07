@@ -1,7 +1,8 @@
 <?xml version="1.0"?>
 <launch>
 
-	<arg name="path_save"   default="/home/george/Desktop/Impedance_Planning/Experiments/Bags"/>
+	<!-- A default path is necessary -->
+	<arg name="path_save"   default="/home"/>
 	<arg name="topic"  	default=""/>
 	<arg name="file_name"  	default=""/>
 
